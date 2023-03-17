@@ -16,7 +16,8 @@ public class TestController {
     @Autowired
     ReadExcelDTB readExcelDTB;
     @GetMapping("/excelReader/{fileName}")
-    public void excelReader(@PathVariable String fileName) throws IOException {
+    public String excelReader(@PathVariable String fileName) throws IOException {
         readExcelDTB.writeToDB(readExcelFileService.readExcelFile(fileName));
+        return "OK";
     }
 }

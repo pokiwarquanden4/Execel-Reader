@@ -21,7 +21,12 @@ public class ReadExcelDTB {
             if (firstRow){
                 firstRow = false;
             }else {
-                userRepo.save(new User(list.get(0), list.get(1), list.get(2)));
+                User user = userRepo.findByName(list.get(1));
+                if (user != null){
+                    userRepo.updateUser(user.getId(), list.get(1), list.get(2));
+                }else {
+                    userRepo.save(new User(list.get(1), list.get(2)));
+                };
             }
         }
     }

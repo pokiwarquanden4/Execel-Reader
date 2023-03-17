@@ -6,15 +6,21 @@ import lombok.*;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@AllArgsConstructor
 @Table(name = "Account")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private String id;
+    private int id;
     @Column(name = "name")
     private String name;
     @Column(name = "pass")
     private String pass;
+
+    public User(String name, String pass) {
+        this.name = name;
+        this.pass = pass;
+    }
 }

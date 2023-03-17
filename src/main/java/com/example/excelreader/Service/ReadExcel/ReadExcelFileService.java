@@ -5,6 +5,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,14 +15,9 @@ import java.util.List;
 
 @Service
 public class ReadExcelFileService {
-    public List<List<String>> readExcelFile(String fileName) throws IOException {
-        //Check First Row
-        boolean firstRow = true;
-        //Đường dẫn file
-        String URL = "C:/Users/Admin/Downloads/basic-authen/" + fileName + ".xlsx";
+    public List<List<String>> readExcelFile(MultipartFile fileExcel) throws IOException {
         //Logic
-        FileInputStream file = new FileInputStream(new File(URL));
-        Workbook workbook = new XSSFWorkbook(file);
+        Workbook workbook = new XSSFWorkbook(fileExcel.getInputStream());
         Sheet sheet = workbook.getSheetAt(0);
         List<List<String>> data = new ArrayList<>();
         for (Row row : sheet) {
@@ -34,7 +30,6 @@ public class ReadExcelFileService {
             data.add(rowData);
         }
         workbook.close();
-        file.close();
         return data;
     }
 }

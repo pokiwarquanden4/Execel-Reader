@@ -1,10 +1,14 @@
 package com.example.excelreader.Controller;
 
+import com.example.excelreader.Model.Path;
 import com.example.excelreader.Service.ExportExcel.ExportExcel;
 import com.example.excelreader.Service.ReadExcel.ReadExcelDTB;
 import com.example.excelreader.Service.ReadExcel.ReadExcelFileService;
+import com.example.excelreader.Model.ResponseData;
+import com.example.excelreader.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -17,15 +21,25 @@ public class TestController {
     ReadExcelDTB readExcelDTB;
     @Autowired
     ExportExcel exportExcel;
-    @GetMapping("/excelReader/{fileName}")
-    public String excelReader(@PathVariable String fileName) throws IOException {
-        readExcelDTB.writeToDB(readExcelFileService.readExcelFile(fileName));
+    @Autowired
+    UserRepo userRepo;
+    @PostMapping("/excelReader")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public String excelReader(@RequestParam("file") MultipartFile file) throws IOException {
+        readExcelDTB.writeToDB(readExcelFileService.readExcelFile(file));
         return "OK";
     }
 
-    @GetMapping("/exportExcel/{fileName}")
-    public String exportExcel(@PathVariable String fileName) throws IOException {
-        exportExcel.exportExcel(fileName);
+    @PostMapping("/exportExcel/{fileName}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public String exportExcel(@PathVariable String fileName, @RequestBody Path path) throws IOException {
+        exportExcel.exportExcel(fileName, path.getData());
         return "OK";
+    }
+
+    @GetMapping("/getUsers")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseData exportExcel() {
+        return new ResponseData(userRepo.findHeaders(), userRepo.getAllUser());
     }
 }

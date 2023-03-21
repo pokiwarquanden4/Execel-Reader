@@ -1,7 +1,6 @@
 package com.example.excelreader.Model;
 
-import com.example.excelreader.entity.User;
-import jakarta.persistence.*;
+import com.example.excelreader.entity.Template;
 import lombok.*;
 
 import java.util.List;
@@ -12,5 +11,5 @@ import java.util.List;
 @AllArgsConstructor
 public class ResponseData {
     private List<String> headers;
-    private List<User> value;
+    private List<Template> value;
 }

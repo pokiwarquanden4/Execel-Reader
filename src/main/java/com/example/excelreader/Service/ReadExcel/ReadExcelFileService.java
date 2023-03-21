@@ -25,11 +25,16 @@ public class ReadExcelFileService {
             for (Cell cell : row) {
                 DataFormatter dataFormatter = new DataFormatter();
                 String cellValue = dataFormatter.formatCellValue(cell);
-                rowData.add(cellValue);
+                if (!cellValue.equals("")){
+                    rowData.add(cellValue);
+                }
             }
-            data.add(rowData);
+            if (rowData.size() != 0) {
+                data.add(rowData);
+            }
         }
         workbook.close();
+        System.out.println(data);
         return data;
     }
 }

@@ -8,19 +8,16 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @AllArgsConstructor
-@Table(name = "Account")
-public class User {
+@Table(name = "Report")
+public class Template {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "pass")
-    private String pass;
+    @Column(name = "imeis")
+    private String imeis;
 
-    public User(String name, String pass) {
-        this.name = name;
-        this.pass = pass;
+    public Template(String imeis) {
+        this.imeis = imeis;
     }
 }

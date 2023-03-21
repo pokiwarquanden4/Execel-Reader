@@ -5,7 +5,7 @@ import com.example.excelreader.Service.ExportExcel.ExportExcel;
 import com.example.excelreader.Service.ReadExcel.ReadExcelDTB;
 import com.example.excelreader.Service.ReadExcel.ReadExcelFileService;
 import com.example.excelreader.Model.ResponseData;
-import com.example.excelreader.repository.UserRepo;
+import com.example.excelreader.repository.ImeisRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +22,7 @@ public class TestController {
     @Autowired
     ExportExcel exportExcel;
     @Autowired
-    UserRepo userRepo;
+    ImeisRepo imeisRepo;
     @PostMapping("/excelReader")
     @CrossOrigin(origins = "http://localhost:3000")
     public String excelReader(@RequestParam("file") MultipartFile file) throws IOException {
@@ -40,6 +40,6 @@ public class TestController {
     @GetMapping("/getUsers")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseData exportExcel() {
-        return new ResponseData(userRepo.findHeaders(), userRepo.getAllUser());
+        return new ResponseData(imeisRepo.findHeaders(), imeisRepo.getAllImeis());
     }
 }

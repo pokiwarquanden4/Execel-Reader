@@ -32,12 +32,12 @@ public class ExportExcel {
         //Create Total Requests
         Row rowTotalRequests = sheet.createRow(0);
         Cell cellTotalRequests = rowTotalRequests.createCell(0);
-        cellTotalRequests.setCellValue("Total Requests: ");
+        cellTotalRequests.setCellValue("Total Requests: " + imeis.size());
 
         //Create Successful Requests
         Row rowSuccessfulRequests = sheet.createRow(1);
         Cell cellSuccessfulRequests = rowSuccessfulRequests.createCell(0);
-        cellSuccessfulRequests.setCellValue("Total Successful Requests: ");
+        cellSuccessfulRequests.setCellValue("Total Successful Requests: " + imeis.size());
 
         //Create Header
         Row row = sheet.createRow(2);

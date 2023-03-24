@@ -14,6 +14,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping
+@CrossOrigin(origins = "http://localhost:3000")
 public class TestController {
     @Autowired
     ReadExcelFileService readExcelFileService;
@@ -24,21 +25,18 @@ public class TestController {
     @Autowired
     ImeisRepo imeisRepo;
     @PostMapping("/excelReader")
-    @CrossOrigin(origins = "http://localhost:3000")
     public String excelReader(@RequestParam("file") MultipartFile file) throws IOException {
         readExcelDTB.writeToDB(readExcelFileService.readExcelFile(file));
         return "OK";
     }
 
     @PostMapping("/exportExcel/{fileName}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public String exportExcel(@PathVariable String fileName, @RequestBody Path path) throws IOException {
         exportExcel.exportExcel(fileName, path.getData());
         return "OK";
     }
 
     @GetMapping("/getUsers")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseData exportExcel() {
         return new ResponseData(imeisRepo.findHeaders(), imeisRepo.getAllImeis());
     }
